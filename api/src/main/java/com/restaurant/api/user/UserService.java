@@ -11,19 +11,19 @@ import reactor.core.publisher.Mono;
 
 public interface UserService {
 
-	@GetMapping(value = "/user/{id}", produces = "application/json")
-	User getUser(@PathVariable Integer id);
+	@GetMapping(value = "/{id}", produces = "application/json")
+	User getUser(@PathVariable("id") Integer id);
     
-    @GetMapping(value = "/user/email/{email}", produces = "application/json")
-    User getUserByEmail(@PathVariable String email);
+    @GetMapping(value = "/email/{email}", produces = "application/json")
+    User getUserByEmail(@PathVariable("email") String email);
 
-    @PostMapping(value = "/user", consumes = "application/json", produces = "application/json")
+    @PostMapping(value = "", consumes = "application/json", produces = "application/json")
     User createUser(@RequestBody User body);
 
-    @DeleteMapping(value = "/user/{id}")
-    Void deleteUser(@PathVariable Integer id);
+    @DeleteMapping(value = "/{id}")
+    Void deleteUser(@PathVariable("id") Integer id);
 
-    @PutMapping(value = "/user/{id}", consumes = "application/json", produces = "application/json")
-    User updateUser(@PathVariable Integer id, @RequestBody User body);
+    @PutMapping(value = "/{id}", consumes = "application/json", produces = "application/json")
+    User updateUser(@PathVariable("id") Integer id, @RequestBody User body);
 	
 }

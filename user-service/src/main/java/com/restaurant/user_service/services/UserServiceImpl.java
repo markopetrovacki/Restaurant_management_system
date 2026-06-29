@@ -5,6 +5,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.restaurant.api.user.User;
 import com.restaurant.api.user.UserService;
@@ -16,7 +17,7 @@ import com.restaurant.util.http.ServiceUtil;
 
 
 
-@Service
+@RestController
 public class UserServiceImpl implements UserService{
 
 	private static final Logger LOG = LoggerFactory.getLogger(UserServiceImpl.class);
