@@ -6,6 +6,8 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.restaurant.api.review.Review;
@@ -16,7 +18,8 @@ import com.restaurant.util.exceptions.InvalidInputException;
 import com.restaurant.util.exceptions.NotFoundException;
 import com.restaurant.util.http.ServiceUtil;
 
-@RestController("/reviews")
+@RestController
+@RequestMapping("/reviews")
 public class ReviewServiceImpl implements ReviewService {
 
 	private static final Logger LOG = LoggerFactory.getLogger(ReviewServiceImpl.class);
@@ -98,7 +101,7 @@ public class ReviewServiceImpl implements ReviewService {
     }
 
     @Override
-    public Review createReview(Review body) {
+    public Review createReview(@RequestBody Review body) {
 
         LOG.debug("createReview: korisnik {}", body.getUserEmail());
 
@@ -135,7 +138,7 @@ public class ReviewServiceImpl implements ReviewService {
     }
 
     @Override
-    public Review updateReview(Integer id, Review body) {
+    public Review updateReview(Integer id, @RequestBody Review body) {
 
         LOG.debug("updateReview: ažuriranje recenzije {}", id);
 

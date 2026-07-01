@@ -2,6 +2,7 @@ plugins {
 	java
 	id("org.springframework.boot") version "3.5.15"
 	id("io.spring.dependency-management") version "1.1.7"
+	id("io.freefair.lombok") version "8.6"
 }
 
 group = "com.restaurant"
@@ -20,17 +21,29 @@ repositories {
 extra["springCloudVersion"] = "2025.0.3"
 
 dependencies {
-	implementation("org.springframework.boot:spring-boot-starter-actuator")
+	
+	implementation("org.springframework.boot:spring-boot-starter-validation")
 	implementation("org.springframework.boot:spring-boot-starter-web")
+    implementation("org.springframework.boot:spring-boot-starter-webflux")
 	implementation("org.springframework.cloud:spring-cloud-starter-config")
 	implementation("org.springframework.cloud:spring-cloud-starter-netflix-eureka-client")
-	implementation("org.springframework.cloud:spring-cloud-starter-openfeign")
+	
+	implementation(project(":api"))
+	implementation(project(":util"))
+    
+    implementation ("org.mapstruct:mapstruct:1.5.5.Final")
+
 	compileOnly("org.projectlombok:lombok")
+	
 	annotationProcessor("org.projectlombok:lombok")
+	annotationProcessor("org.projectlombok:lombok-mapstruct-binding:0.2.0")
+    annotationProcessor ("org.mapstruct:mapstruct-processor:1.5.5.Final")
+	
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
+	
 	testCompileOnly("org.projectlombok:lombok")
-	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 	testAnnotationProcessor("org.projectlombok:lombok")
+	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
 
 dependencyManagement {

@@ -3,6 +3,8 @@ package com.restaurant.restaurant_service.services;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.restaurant.api.restaurant.Restaurant;
@@ -13,7 +15,8 @@ import com.restaurant.util.exceptions.InvalidInputException;
 import com.restaurant.util.exceptions.NotFoundException;
 import com.restaurant.util.http.ServiceUtil;
 
-@RestController("/restaurants")
+@RestController
+@RequestMapping("/restaurants")
 public class RestaurantServiceImpl implements RestaurantService {
 
 	private static final Logger LOG = LoggerFactory.getLogger(RestaurantServiceImpl.class);
@@ -70,7 +73,7 @@ public class RestaurantServiceImpl implements RestaurantService {
     }
 
     @Override
-    public Restaurant createRestaurant(Restaurant body) {
+    public Restaurant createRestaurant(@RequestBody Restaurant body) {
 
         LOG.debug("createRestaurant: kreiranje restorana: {}", body.getName());
 
@@ -112,7 +115,7 @@ public class RestaurantServiceImpl implements RestaurantService {
     }
 
     @Override
-    public Restaurant updateRestaurant(Integer id, Restaurant body) {
+    public Restaurant updateRestaurant(Integer id,@RequestBody Restaurant body) {
 
         LOG.debug("updateRestaurant: ažuriranje restorana sa ID: {}", id);
 

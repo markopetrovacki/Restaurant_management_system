@@ -6,6 +6,9 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.restaurant.api.notification.Notification;
 import com.restaurant.api.notification.NotificationService;
@@ -15,6 +18,8 @@ import com.restaurant.util.exceptions.InvalidInputException;
 import com.restaurant.util.exceptions.NotFoundException;
 import com.restaurant.util.http.ServiceUtil;
 
+@RestController
+@RequestMapping("/notifications")
 public class NotificationServiceImpl implements NotificationService {
 
 	private static final Logger LOG = LoggerFactory.getLogger(NotificationServiceImpl.class);
@@ -84,7 +89,7 @@ public class NotificationServiceImpl implements NotificationService {
     }
 
     @Override
-    public Notification createNotification(Notification body) {
+    public Notification createNotification(@RequestBody Notification body) {
 
         LOG.debug("createNotification: {}", body.getRecipientEmail());
 
@@ -114,7 +119,7 @@ public class NotificationServiceImpl implements NotificationService {
     }
 
     @Override
-    public Notification updateNotification(Integer id, Notification body) {
+    public Notification updateNotification(Integer id, @RequestBody Notification body) {
 
         LOG.debug("updateNotification: {}", id);
 
